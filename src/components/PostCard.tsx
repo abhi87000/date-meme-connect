@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface PostCardProps {
   id: string;
@@ -11,6 +12,7 @@ interface PostCardProps {
     name: string;
     avatar: string;
     age: number;
+    userId?: string;
   };
   content: string;
   image?: string;
@@ -28,11 +30,13 @@ const PostCard = ({ author, content, image, likes, comments, timeAgo }: PostCard
     setLikeCount(isLiked ? likeCount - 1 : likeCount + 1);
   };
 
+  const authorId = author.userId || "1"; // Default ID for demo
+
   return (
     <Card className="mb-6 overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/70 backdrop-blur-sm">
       <div className="p-4">
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-3">
+          <Link to={`/profile/${authorId}`} className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
             <Avatar className="h-12 w-12 ring-2 ring-primary/20">
               <AvatarImage src={author.avatar} alt={author.name} />
               <AvatarFallback className="gradient-pink text-white font-semibold">
@@ -40,10 +44,10 @@ const PostCard = ({ author, content, image, likes, comments, timeAgo }: PostCard
               </AvatarFallback>
             </Avatar>
             <div>
-              <h3 className="font-semibold text-lg">{author.name}, {author.age}</h3>
+              <h3 className="font-semibold text-lg hover:text-primary transition-colors">{author.name}, {author.age}</h3>
               <p className="text-sm text-muted-foreground">{timeAgo}</p>
             </div>
-          </div>
+          </Link>
           <Button variant="ghost" size="icon">
             <MoreHorizontal className="h-5 w-5" />
           </Button>

@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Calendar } from "lucide-react";
-import { useState } from "react";
+import { MapPin, Eye } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface ProfileCardProps {
   id: string;
@@ -17,15 +17,7 @@ interface ProfileCardProps {
   photos: string[];
 }
 
-const ProfileCard = ({ name, age, avatar, bio, location, interests, photos }: ProfileCardProps) => {
-  const [requestSent, setRequestSent] = useState(false);
-
-  const handleDateRequest = () => {
-    setRequestSent(true);
-    // Here you would typically send the request to your backend
-    console.log(`Date request sent to ${name}`);
-  };
-
+const ProfileCard = ({ id, name, age, avatar, bio, location, interests, photos }: ProfileCardProps) => {
   return (
     <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/70 backdrop-blur-sm">
       <div className="relative">
@@ -45,13 +37,13 @@ const ProfileCard = ({ name, age, avatar, bio, location, interests, photos }: Pr
             <MapPin className="h-4 w-4 mr-1" />
             <span className="text-sm">{location}</span>
           </div>
-          <p className="text-gray-600 leading-relaxed">{bio}</p>
+          <p className="text-gray-600 leading-relaxed line-clamp-3">{bio}</p>
         </div>
         
         <div className="mb-4">
           <h4 className="font-semibold mb-2 text-sm uppercase tracking-wide text-gray-500">Interests</h4>
           <div className="flex flex-wrap gap-2">
-            {interests.map((interest, index) => (
+            {interests.slice(0, 4).map((interest, index) => (
               <Badge
                 key={index}
                 variant="secondary"
@@ -77,23 +69,16 @@ const ProfileCard = ({ name, age, avatar, bio, location, interests, photos }: Pr
           </div>
         </div>
         
-        <Button
-          onClick={handleDateRequest}
-          disabled={requestSent}
-          className="w-full gradient-pink text-white font-semibold py-3 rounded-xl hover:opacity-90 transition-all duration-300 disabled:opacity-50"
-        >
-          {requestSent ? (
+        <Link to={`/profile/${id}`}>
+          <Button
+            className="w-full gradient-pink text-white font-semibold py-3 rounded-xl hover:opacity-90 transition-all duration-300"
+          >
             <div className="flex items-center justify-center space-x-2">
-              <Calendar className="h-4 w-4" />
-              <span>Date Request Sent!</span>
+              <Eye className="h-4 w-4" />
+              <span>View Profile</span>
             </div>
-          ) : (
-            <div className="flex items-center justify-center space-x-2">
-              <Calendar className="h-4 w-4" />
-              <span>Ask on Date</span>
-            </div>
-          )}
-        </Button>
+          </Button>
+        </Link>
       </div>
     </Card>
   );

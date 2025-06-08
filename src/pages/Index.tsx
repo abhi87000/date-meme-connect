@@ -12,7 +12,8 @@ const Index = () => {
       author: {
         name: "Emma",
         avatar: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=400&fit=crop&crop=face",
-        age: 25
+        age: 25,
+        userId: "user-emma"
       },
       content: "When he says he's 6 feet tall but you're 5'2 and still looking down at him 😂 #DatingReality",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
@@ -25,7 +26,8 @@ const Index = () => {
       author: {
         name: "Jake",
         avatar: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=400&fit=crop&crop=face",
-        age: 28
+        age: 28,
+        userId: "user-jake"
       },
       content: "Me: I'm looking for something serious\nAlso me: *swipes right based on their pet in the photo* 🐕❤️",
       likes: 89,
@@ -37,7 +39,8 @@ const Index = () => {
       author: {
         name: "Sofia",
         avatar: "https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=400&h=400&fit=crop&crop=face", 
-        age: 26
+        age: 26,
+        userId: "user-sofia"
       },
       content: "Dating in 2024: 'Are you even real?' has become a legitimate question to ask someone 😅 #OnlineDating",
       image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=600&h=400&fit=crop",
@@ -49,7 +52,7 @@ const Index = () => {
 
   const suggestedProfiles = [
     {
-      id: "1",
+      id: "user-alex",
       name: "Alex",
       age: 27,
       avatar: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=400&fit=crop&crop=face",
@@ -63,7 +66,7 @@ const Index = () => {
       ]
     },
     {
-      id: "2",
+      id: "user-maya",
       name: "Maya",
       age: 24,
       avatar: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=400&fit=crop&crop=face",
