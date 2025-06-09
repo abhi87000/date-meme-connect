@@ -5,7 +5,6 @@ import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import LazyImage from "@/components/LazyImage";
 
 interface PostCardProps {
   id: string;
@@ -31,7 +30,7 @@ const PostCard = ({ author, content, image, likes, comments, timeAgo }: PostCard
     setLikeCount(isLiked ? likeCount - 1 : likeCount + 1);
   };
 
-  const authorId = author.userId || "1";
+  const authorId = author.userId || "1"; // Default ID for demo
 
   return (
     <Card className="mb-6 overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/70 backdrop-blur-sm">
@@ -57,11 +56,11 @@ const PostCard = ({ author, content, image, likes, comments, timeAgo }: PostCard
         <p className="text-gray-800 mb-4 leading-relaxed">{content}</p>
         
         {image && (
-          <div className="mb-4 rounded-xl overflow-hidden relative h-64">
-            <LazyImage
+          <div className="mb-4 rounded-xl overflow-hidden">
+            <img
               src={image}
               alt="Post content"
-              className="w-full h-full hover:scale-105 transition-transform duration-300"
+              className="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
             />
           </div>
         )}
