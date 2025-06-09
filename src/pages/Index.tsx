@@ -62,20 +62,20 @@ const Index = () => {
               {posts.map((post) => (
                 <PostCard key={post.id} {...post} />
               ))}
-              
-              {loading && (
-                <div className="py-8">
-                  <LoadingSpinner size={32} className="py-4" />
-                  <p className="text-center text-gray-500">Loading more posts...</p>
-                </div>
-              )}
-              
-              {!loading && !hasMore && posts.length > 0 && (
-                <div className="py-8 text-center text-gray-500">
-                  <p>You've reached the end! 🎉</p>
-                </div>
-              )}
             </div>
+            
+            {loading && (
+              <div className="py-8">
+                <LoadingSpinner size={32} className="py-4" />
+                <p className="text-center text-gray-500">Loading more posts...</p>
+              </div>
+            )}
+            
+            {!loading && !hasMore && posts.length > 0 && (
+              <div className="py-8 text-center text-gray-500">
+                <p>You've reached the end! 🎉</p>
+              </div>
+            )}
           </div>
           
           {/* Sidebar */}
