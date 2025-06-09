@@ -5,7 +5,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
-import LazyImage from "@/components/LazyImage";
 
 interface ProfileCardProps {
   id: string;
@@ -59,11 +58,11 @@ const ProfileCard = ({ id, name, age, avatar, bio, location, interests, photos }
         <div className="mb-6">
           <div className="grid grid-cols-3 gap-2">
             {photos.slice(0, 3).map((photo, index) => (
-              <div key={index} className="aspect-square rounded-lg overflow-hidden relative">
-                <LazyImage
+              <div key={index} className="aspect-square rounded-lg overflow-hidden">
+                <img
                   src={photo}
                   alt={`${name}'s photo ${index + 1}`}
-                  className="w-full h-full hover:scale-110 transition-transform duration-300"
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                 />
               </div>
             ))}

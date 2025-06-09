@@ -1,21 +1,54 @@
 
-import { useEffect } from "react";
 import Header from "@/components/Header";
 import PostCard from "@/components/PostCard";
 import ProfileCard from "@/components/ProfileCard";
 import CreatePost from "@/components/CreatePost";
-import LoadingSpinner from "@/components/LoadingSpinner";
-import { usePaginatedFeed } from "@/hooks/usePaginatedFeed";
-import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 
 const Index = () => {
-  const { posts, loading, hasMore, loadMore, initializeFeed } = usePaginatedFeed();
-
-  useInfiniteScroll(loadMore, { hasMore, loading });
-
-  useEffect(() => {
-    initializeFeed();
-  }, [initializeFeed]);
+  // Mock data for demonstration
+  const posts = [
+    {
+      id: "1",
+      author: {
+        name: "Emma",
+        avatar: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=400&fit=crop&crop=face",
+        age: 25,
+        userId: "user-emma"
+      },
+      content: "When he says he's 6 feet tall but you're 5'2 and still looking down at him 😂 #DatingReality",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
+      likes: 124,
+      comments: 23,
+      timeAgo: "2 hours ago"
+    },
+    {
+      id: "2", 
+      author: {
+        name: "Jake",
+        avatar: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=400&fit=crop&crop=face",
+        age: 28,
+        userId: "user-jake"
+      },
+      content: "Me: I'm looking for something serious\nAlso me: *swipes right based on their pet in the photo* 🐕❤️",
+      likes: 89,
+      comments: 15,
+      timeAgo: "4 hours ago"
+    },
+    {
+      id: "3",
+      author: {
+        name: "Sofia",
+        avatar: "https://images.unsplash.com/photo-1466721591366-2d5fba72006d?w=400&h=400&fit=crop&crop=face", 
+        age: 26,
+        userId: "user-sofia"
+      },
+      content: "Dating in 2024: 'Are you even real?' has become a legitimate question to ask someone 😅 #OnlineDating",
+      image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=600&h=400&fit=crop",
+      likes: 156,
+      comments: 31,
+      timeAgo: "6 hours ago"
+    }
+  ];
 
   const suggestedProfiles = [
     {
@@ -62,19 +95,6 @@ const Index = () => {
               {posts.map((post) => (
                 <PostCard key={post.id} {...post} />
               ))}
-              
-              {loading && (
-                <div className="py-8">
-                  <LoadingSpinner size={32} className="py-4" />
-                  <p className="text-center text-gray-500">Loading more posts...</p>
-                </div>
-              )}
-              
-              {!loading && !hasMore && posts.length > 0 && (
-                <div className="py-8 text-center text-gray-500">
-                  <p>You've reached the end! 🎉</p>
-                </div>
-              )}
             </div>
           </div>
           
