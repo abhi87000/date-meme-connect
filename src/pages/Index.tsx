@@ -62,14 +62,15 @@ const Index = () => {
               {posts.map((post) => (
                 <PostCard key={post.id} {...post} />
               ))}
+              
+              {/* Loading indicator at the bottom of posts */}
+              {loading && (
+                <div className="flex flex-col items-center justify-center py-8 space-y-3">
+                  <LoadingSpinner size={32} />
+                  <p className="text-center text-gray-500 font-medium">Loading more posts...</p>
+                </div>
+              )}
             </div>
-            
-            {loading && (
-              <div className="py-8">
-                <LoadingSpinner size={32} className="py-4" />
-                <p className="text-center text-gray-500">Loading more posts...</p>
-              </div>
-            )}
             
             {!loading && !hasMore && posts.length > 0 && (
               <div className="py-8 text-center text-gray-500">
