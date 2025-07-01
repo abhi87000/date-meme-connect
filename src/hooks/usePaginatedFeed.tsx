@@ -31,9 +31,9 @@ export const usePaginatedFeed = () => {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 500));
     
-    const newPosts = generateMockPosts(page, 10);
+    const newPosts = generateMockPosts(page, 20);
     
-    if (newPosts.length === 0 || page >= 50) { // Limit to 500 posts total (50 pages * 10 posts)
+    if (newPosts.length === 0 || page >= 25) { // Limit to 500 posts total (25 pages * 20 posts)
       setHasMore(false);
     } else {
       setPosts(prev => [...prev, ...newPosts]);
@@ -54,7 +54,7 @@ export const usePaginatedFeed = () => {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 500));
     
-    const initialPosts = generateMockPosts(0, 10);
+    const initialPosts = generateMockPosts(0, 20);
     setPosts(initialPosts);
     setPage(1);
     setLoading(false);
