@@ -1,5 +1,5 @@
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { generateMockPosts } from '@/utils/mockData';
 
 interface Post {
@@ -22,10 +22,12 @@ export const usePaginatedFeed = () => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
+  const [initialized, setInitialized] = useState(false);
 
   const loadMore = useCallback(async () => {
     if (loading || !hasMore) return;
 
+    console.log("Loading more posts, page:", page);
     setLoading(true);
     
     // Simulate API delay
@@ -44,8 +46,10 @@ export const usePaginatedFeed = () => {
   }, [loading, hasMore, page]);
 
   const initializeFeed = useCallback(async () => {
-    if (loading) return;
+    if (initialized) return;
     
+    console.log("Initializing feed for first time...");
+    setInitialized(true);
     setPosts([]);
     setPage(0);
     setHasMore(true);
@@ -58,7 +62,7 @@ export const usePaginatedFeed = () => {
     setPosts(initialPosts);
     setPage(1);
     setLoading(false);
-  }, [loading]);
+  }, [initialized]);
 
   return {
     posts,
