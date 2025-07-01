@@ -14,8 +14,11 @@ const Index = () => {
   useInfiniteScroll(loadMore, { hasMore, loading });
 
   useEffect(() => {
+    console.log("Initializing feed...");
     initializeFeed();
   }, [initializeFeed]);
+
+  console.log("Posts loaded:", posts.length, "Loading:", loading, "Has more:", hasMore);
 
   const suggestedProfiles = [
     {
@@ -58,20 +61,32 @@ const Index = () => {
           <div className="lg:col-span-2">
             <CreatePost />
             
-            <div className="space-y-6">
-              {posts.map((post) => (
-                <PostCard key={post.id} {...post} />
-              ))}
-              
-              {/* Loading indicator at the bottom of posts */}
-              {loading && (
-                <div className="flex flex-col items-center justify-center py-8 space-y-3">
-                  <LoadingSpinner size={32} />
-                  <p className="text-center text-gray-500 font-medium">Loading more posts...</p>
-                </div>
-              )}
-            </div>
+            {/* Initial loading state */}
+            {loading && posts.length === 0 && (
+              <div className="flex flex-col items-center justify-center py-8 space-y-3">
+                <LoadingSpinner size={32} />
+                <p className="text-center text-gray-500 font-medium">Loading posts...</p>
+              </div>
+            )}
             
+            {/* Posts */}
+            {posts.length > 0 && (
+              <div className="space-y-6">
+                {posts.map((post) => (
+                  <PostCard key={post.id} {...post} />
+                ))}
+              </div>
+            )}
+            
+            {/* Loading more posts indicator - only show when we have posts and are loading more */}
+            {loading && posts.length > 0 && (
+              <div className="flex flex-col items-center justify-center py-8 space-y-3 mt-6">
+                <LoadingSpinner size={32} />
+                <p className="text-center text-gray-500 font-medium">Loading more posts...</p>
+              </div>
+            )}
+            
+            {/* End of feed message */}
             {!loading && !hasMore && posts.length > 0 && (
               <div className="py-8 text-center text-gray-500">
                 <p>You've reached the end! 🎉</p>
